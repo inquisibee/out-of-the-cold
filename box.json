@@ -1,0 +1,54 @@
+{
+    "name":"Car Tracker CBORM Demo",
+    "version":"3.0.0",
+    "location":"forgeboxStorage",
+    "author":"Luis Majano <lmajano@ortussolutions.com>",
+    "homepage":"https://github.com/coldbox-samples/Pink-Unicorns-Do-Exist",
+    "repository":{
+        "type":"git",
+        "url":"https://github.com/coldbox-samples/Pink-Unicorns-Do-Exist"
+    },
+    "bugs":"https://github.com/coldbox-samples/Pink-Unicorns-Do-Exist/issues",
+    "slug":"cartracker-demo",
+    "shortDescription":"An awesome demo of the ColdBox cborm module in action",
+    "type":"Demos",
+    "license":[
+        {
+            "type":"Apache2",
+            "url":"http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    ],
+    "contributors":[
+        "Joel Watson <existdissolve@gmail.com>",
+        "Javier Quintero <jquintero@ortussolutions.com>"
+    ],
+    "dependencies":{
+        "coldbox":"^5.0.0",
+        "cborm":"^2.0.0",
+        "cbCodeHighlight":"^1.0.0+10"
+    },
+    "devDependencies":{
+        "testbox":"^3.0.0",
+        "commandbox-dotenv":"*",
+        "commandbox-cfconfig":"*",
+        "commandbox-cfformat":"*"
+    },
+    "installPaths":{
+        "coldbox":"coldbox/",
+        "cborm":"modules/cborm/",
+        "testbox":"testbox/",
+        "cbCodeHighlight":"modules/cbCodeHighlight/"
+    },
+    "scripts":{
+        "postInstall":"pathExists .env || cp .env.example .env",
+        "format":"cfformat config/**/*.cfc,handlers/**/*.cfc,models/**/*.cfc,tests/specs/**/*.cfc,*.cfc --overwrite",
+        "format:check":"cfformat config/**/*.cfc,handlers/**/*.cfc,models/**/*.cfc,tests/specs/**/*.cfc,*.cfc --check"
+    },
+    "testbox":{
+        "runner":[
+            {
+                "default":"http://localhost:8090/tests/runner.cfm"
+            }
+        ]
+    }
+}

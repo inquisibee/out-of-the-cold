@@ -1,0 +1,15 @@
+# Engines
+WEB-INF
+.engine
+
+# Dependencies
+coldbox/**
+testbox/**
+modules/**
+logs/**
+
+# env
+.settings
+
+# Docker Database
+workbench/db/**
