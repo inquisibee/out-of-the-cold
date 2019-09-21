@@ -1,7 +1,6 @@
 {
     "app":{
-        "serverHomeDirectory":".engine/lucee5",
-        "cfengine":"lucee@5"
+        "cfengine":"adobe@11.0.19.314546"
     },
     "web":{
         "rewrites":{

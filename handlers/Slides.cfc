@@ -70,7 +70,7 @@ component {
 		// Create new Active car
 		prc.newCar	= getInstance( "ActiveCar" )
 			.new( { Year = 2012, ListPrice = 22000 } )
-			.validateOrFail()
+			.validateOrFail();
 
 		//Find a specific cars
 		prc.myCar 		= getInstance( "ActiveCar" )

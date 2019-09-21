@@ -47,7 +47,7 @@ CREATE TABLE `Car` (
   `SaleDate` datetime DEFAULT NULL,
   `IsSold` bit(1) NOT NULL DEFAULT b'0',
   `StatusID` int(11) NOT NULL,
-  `CreatedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` timestamp NOT NULL,
   `Active` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`CarID`),
   KEY `StatusID_idx` (`StatusID`),

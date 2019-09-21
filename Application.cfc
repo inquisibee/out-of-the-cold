@@ -28,7 +28,7 @@ component {
 	// ORM Settings
 	this.ormenabled = true;
 	this.ormsettings = {
-		cfclocation : "models.orm",
+		cfclocation : "models/orm",
 		datasource : "CarTracker",
 		// Logging is on so you can see and debug any issues
 		logsql : true,
