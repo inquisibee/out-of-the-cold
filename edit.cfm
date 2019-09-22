@@ -48,6 +48,8 @@
 	ORDER BY longName
 </cfquery>
 
+<cfinclude template="includes/cfml/header.cfm"/>
+
 <!-- Area Chart -->
 <cfoutput>
 	<div class="card border-0 shadow mb-4">
@@ -59,7 +61,7 @@
 		<div class="card-body">
 			<div class="row">
 				<div class="col-md-12">
-					<form action="/manager/save" method="post">
+					<form action="save.cfm" method="post">
 						<input type="hidden" name="carID" value="#getCar.carID#"/>
 						<div class="form-group">
 							<label for="make">Make</label>
@@ -126,7 +128,7 @@
 							<textarea id="description" name="description" class="rich-text">#getCar.description#</textarea>
 						</div>
 						<div class="form-group text-right">
-							<a class="btn btn-sm btn-danger" id="cancel" href="/manager">Cancel</a>
+							<a class="btn btn-sm btn-danger" id="cancel" href="admin.cfm">Cancel</a>
 							<button type="submit" class="btn btn-sm btn-primary">Save</button>
 					</form>
 				</div>
@@ -134,3 +136,5 @@
 		</div>
 	</div>
 </cfoutput>
+
+<cfinclude template="includes/cfml/footer.cfm"/>

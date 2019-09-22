@@ -11,9 +11,6 @@ component {
 	this.sessionManagement = true;
 	this.sessionTimeout = createTimespan( 0, 0, 30, 0 );
 	this.setClientCookies = true;
-
-
-	// Name of main application datasource, created in CFAdmin
 	this.datasource="cartracker";
 
 

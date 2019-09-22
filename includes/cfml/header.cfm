@@ -1,6 +1,5 @@
-<cfparam name="prc.pageTitle" default="">
-<cfparam name="rc.alert" default=""/>
-<cfparam name="rc.alertType" default=""/>
+<cfparam name="url.alert" default=""/>
+<cfparam name="url.alertType" default=""/>
 <cfoutput>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="ColdBox cborm module">
 	<meta name="author" content="Ortus Solutions, Corp">
-	<title>#len(prc.pageTitle) ? prc.pageTitle & ' - ' : ''# Comming Out of the Cold</title>
+	<title>Comming Out of the Cold</title>
 
 	<!-- Bootstrap + Fontawesome-->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -32,12 +31,12 @@
 		<nav style="overflow-y: auto;height: 100%;padding-bottom: 49px;">
 			<ul class="navbar-nav nav-menu-fixed bg-gradient-coldbox sidebar accordion" id="accordionSidebar" >
 				<li class="nav-item">
-					<a class="nav-link" href="/storefront">
+					<a class="nav-link" href="/index.cfm">
 						<span>Storefront</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/manager">
+					<a class="nav-link" href="/admin.cfm">
 						<span>Manager</span>
 					</a>
 				</li>
@@ -67,7 +66,7 @@
 
 				<div class="container-fluid container-fixed" id="containerView">
 					<div id="top-container"></div>
-					<cfif len(rc.alert)>
-						<div class="alert alert-#rc.alertType#">#rc.alert#</div>
+					<cfif len(url.alert)>
+						<div class="alert alert-#url.alertType#">#url.alert#</div>
 					</cfif>
 </cfoutput>
