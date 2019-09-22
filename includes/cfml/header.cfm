@@ -12,9 +12,6 @@
 	<meta name="author" content="Ortus Solutions, Corp">
 	<title>#len(prc.pageTitle) ? prc.pageTitle & ' - ' : ''# Comming Out of the Cold</title>
 
-	<!--- Base URL --->
-	<base href="#event.getHTMLBaseURL()#">
-
 	<!-- Bootstrap + Fontawesome-->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -34,13 +31,13 @@
 		<!-- Sidebar -->
 		<nav style="overflow-y: auto;height: 100%;padding-bottom: 49px;">
 			<ul class="navbar-nav nav-menu-fixed bg-gradient-coldbox sidebar accordion" id="accordionSidebar" >
-				<li class="nav-item #event.getCurrentAction() eq  'storefront' ?'active':''#  ">
-					<a class="nav-link" href="#event.buildLink( to='storefront' )#">
+				<li class="nav-item">
+					<a class="nav-link" href="/storefront">
 						<span>Storefront</span>
 					</a>
 				</li>
-				<li class="nav-item #event.getCurrentAction() eq  'manager' ?'active':''# ">
-					<a class="nav-link" href="#event.buildLink( to='manager' )#">
+				<li class="nav-item">
+					<a class="nav-link" href="/manager">
 						<span>Manager</span>
 					</a>
 				</li>
@@ -60,7 +57,7 @@
 
 				<!-- Topbar -->
 				<nav class="navbar navbar-expand navbar-light bg-coldbox topbar mb-4 static-top shadow navbar-fixed" >
-					<a class="sidebar-brand d-flex align-items-center justify-content-center my-2" href="#event.buildLink( to='' )#">
+					<a class="sidebar-brand d-flex align-items-center justify-content-center my-2" href="">
 						<div class="sidebar-brand-text mx-3">
 							<img src="/includes/images/logo-coldbox.png" style="width:241px;">
 						</div>
@@ -73,3 +70,4 @@
 					<cfif len(rc.alert)>
 						<div class="alert alert-#rc.alertType#">#rc.alert#</div>
 					</cfif>
+</cfoutput>
