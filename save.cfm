@@ -1,3 +1,6 @@
+<cfinclude template="authenticate.cfm"/>
+
+
 <cfscript>
 transaction {
 	// are we adding a new make»

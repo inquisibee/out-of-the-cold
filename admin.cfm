@@ -1,3 +1,5 @@
+<cfinclude template="authenticate.cfm"/>
+
 <cfquery name="getCars" datasource="cartracker">
 	SELECT
 		c.*,

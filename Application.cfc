@@ -28,6 +28,7 @@ component {
 	}
 
 	public void function onSessionStart(){
+		param name="session.authenticated" default="false";
 	}
 
 	public void function onSessionEnd( struct sessionScope, struct appScope ){
