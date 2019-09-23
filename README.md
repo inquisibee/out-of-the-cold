@@ -1,12 +1,22 @@
-# Pink Unicorns Do Exist
+# Coming out of the Cold
 
-This is sample application that shows you the power of the ColdBox ORM Module.  You will need CommandBox installed in your machine in order to install and run dependencies.
+This is a sample application built to help you learn some more advanced CF development techniques. The application is built from the **Pink Unicorns do Exist** open source project (https://github.com/coldbox-samples/Pink-Unicorns-Do-Exist).  You will need CommandBox installed in your machine in order to install and run dependencies.
 
 *Get CommandBox* : https://www.ortussolutions.com/products/commandbox
 
 ## Instructions
 
+
+
 ### Step 1 : Database Setup
+
+You will need to install Docker (or Docker Toolbox) https://docs.docker.com/install/
+
+Once you have Docker up and running you need to start your DB by opening up your terminal from this directory and then running:
+
+```
+docker-compose up -d
+```
 
 This sample application was built using MySQL 5 and you can find the file `CarTracker.sql` in the **worbench** folder of the application that you can use to pre-load your application.
 
@@ -33,5 +43,3 @@ Go in to the CommandBox shell by typing `box` and enter. Then type `install` to 
 ### Step 4: Run it!
 
 That's it, just run the application via CommandBox by typing `server start`.  This will open the browser to http://localhost:8090.  The port **8090** is configured inside the `box.json` file.
-
-> There is a bug in Lucee that on first server start you might get some ORM issues.  Just do a `server restart` and it should be kicking again.
