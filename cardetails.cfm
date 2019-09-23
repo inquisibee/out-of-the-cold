@@ -10,14 +10,14 @@
 	JOIN Make ma ON c.makeID = ma.makeID
 	JOIN Model mo ON c.modelID = mo.modelID
 	JOIN Color co ON c.colorID = co.colorID
-	WHERE carID = #URL.carID#
+	WHERE carID = <cfqueryparam value="#URL.carID#" cfsqltype="cf_sql_integer"/>
 </cfquery>
 
 <!--- // images --->
 <cfquery name="getImages" datasource="cartracker">
 	SELECT *
 	FROM Image
-	WHERE carID = #URL.carID#
+	WHERE carID = <cfqueryparam value="#URL.carID#" cfsqltype="cf_sql_integer"/>
 </cfquery>
 
 <cfinclude template="includes/cfml/header.cfm"/>
@@ -48,7 +48,7 @@
 								</cfif>
 								<cfloop query="#getImages#">
 									<div class="carousel-item #getImages.currentRow eq 1 ? 'active' : ''#">
-										<img class="d-block w-100" src="#getImages.path#" alt=""/>
+										<img class="d-block w-100" src="#encodeForHTMLAttribute(getImages.path)#" alt=""/>
 									</div>
 								</cfloop>
 								<a class="carousel-control-prev" href="##carousel" role="button" data-slide="prev">
@@ -63,12 +63,12 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<h3>#getCar.year# #getCar.make# #getCar.model#</h3>
-						<strong>#getCar.color#</strong><br/>
-						<strong>#getCar.transmission#</strong><br/>
-						<div class="alert alert-success text-center"><strong>$#getCar.salePrice#</strong></div>
-						Stock No: #getCar.stockNumber#<br/>
-						<blockquote>#getCar.description#</blockquote>
+						<h3>#encodeForHTML(getCar.year)# #encodeForHTML(getCar.make)# #encodeForHTML(getCar.model)#</h3>
+						<strong>#encodeForHTML(getCar.color)#</strong><br/>
+						<strong>#encodeForHTML(getCar.transmission)#</strong><br/>
+						<div class="alert alert-success text-center"><strong>$#encodeForHTML(getCar.salePrice)#</strong></div>
+						Stock No: #encodeForHTML(getCar.stockNumber)#<br/>
+						<blockquote>#encodeForHTML(getCar.description)#</blockquote>
 					</div>
 				</div>
 			<cfelse>

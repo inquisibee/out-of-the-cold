@@ -1,4 +1,36 @@
+<cfinclude template="authenticate.cfm"/>
+
 <cfscript>
+
+if( !CSRFverifyToken(form.token, session.csrfToken) ){
+	throw("Invalid token");
+}
+
+for( formField in form ){
+	if( IsSimpleValue(form[formField]) ){
+		try{
+			form[formField] = canonicalize(form[formField], true, true);
+		} catch ( any e ){
+			writeLog( file="encodingErrors", text="#formField# - #left(catch.logMessage, Find(' in', cfcatch.logMessage))#", type="error", application="true");
+			// reset this variable so that its not harmful
+			form[formField] = "";
+		}
+	}
+}
+
+validationErrors = [];
+
+// make sure all number fields are numbers
+for( numberField in ["carID","makeID","modelID","colorID","categoryID"] ){
+	if( structKeyExists(form, numberField) and len(form[numberField]) and not isValid("regex", form[numberField], "^[0-9]+$") ){
+		arrayAppend(validationErrors, numberField & ' contains invalid characters');
+	}
+}
+
+if( arrayLen(validationErrors) ){
+	throw("The following errors have occurred - please go back and make changes<br/>" & arrayToList(validationErrors, '<br/>'));
+}
+
 transaction {
 	// are we adding a new make»
 	if( len(form.newMake) ){

@@ -30,12 +30,12 @@
 		</div>
 		<cfloop query="#getCars#">
 			<div class="row mb-2">
-				<div class="col-md-2"><a href="/cardetails.cfm?carID=#getCars.carID#">#getCars.make# #getCars.model#</a></div>
-				<div class="col-md-2">#getCars.year#</div>
-				<div class="col-md-2">#getCars.color#</div>
-				<div class="col-md-2 text-right">$#getCars.listPrice#</div>
-				<div class="col-md-2 text-success text-right"><strong>$#getCars.salePrice#</strong></div>
-				<div class="col-md-2 text-right"><a href="/cardetails.cfm?carID=#getCars.carID#" class="btn btn-primary btn-sm">View</a></div>
+				<div class="col-md-2"><a href="/cardetails.cfm?carID=#encodeForURL(getCars.carID)#">#encodeForHTML(getCars.make)# #encodeForHTML(getCars.model)#</a></div>
+				<div class="col-md-2">#encodeForHTML(getCars.year)#</div>
+				<div class="col-md-2">#encodeForHTML(getCars.color)#</div>
+				<div class="col-md-2 text-right">$#encodeForHTML(getCars.listPrice)#</div>
+				<div class="col-md-2 text-success text-right"><strong>$#encodeForHTML(getCars.salePrice)#</strong></div>
+				<div class="col-md-2 text-right"><a href="/cardetails.cfm?carID=#encodeForURL(getCars.carID)#" class="btn btn-primary btn-sm">View</a></div>
 			</div>
 		</cfloop>
 	</div>

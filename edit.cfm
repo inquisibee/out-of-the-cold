@@ -1,3 +1,5 @@
+<cfinclude template="authenticate.cfm"/>
+
 <cfparam name="url.carID" default="0"/>
 
 <cfquery name="getCar" datasource="cartracker">
@@ -13,14 +15,14 @@
 	JOIN Make ma ON c.makeID = ma.makeID
 	JOIN Model mo ON c.modelID = mo.modelID
 	JOIN Color co ON c.colorID = co.colorID
-	WHERE carID = #URL.carID#
+	WHERE carID = <cfqueryparam value="#URL.carID#" cfsqltype="cf_sql_integer"/>
 </cfquery>
 
 <!--- // images --->
 <cfquery name="getImages" datasource="cartracker">
 	SELECT *
 	FROM Image
-	WHERE carID = #URL.carID#
+	WHERE carID = <cfqueryparam value="#URL.carID#" cfsqltype="cf_sql_integer"/>
 </cfquery>
 
 
@@ -54,7 +56,7 @@
 <cfoutput>
 	<div class="card border-0 shadow mb-4">
 		<div class="card-header border-0 py-3 d-flex flex-row align-items-center justify-content-between">
-			<h6 class="m-0 font-weight-bold text-primary">Car Details</h6><a href="/manager" class="btn btn-sm btn-primary">Back to listings</a>
+			<h6 class="m-0 font-weight-bold text-primary">Car Details</h6><a href="admin.cfm" class="btn btn-sm btn-primary">Back to Manager</a>
 			<!-- Card Header Dropdown -->
 		</div>
 
@@ -62,13 +64,14 @@
 			<div class="row">
 				<div class="col-md-12">
 					<form action="save.cfm" method="post">
-						<input type="hidden" name="carID" value="#getCar.carID#"/>
+						<input type="hidden" name="carID" value="#encodeForHTMLAttribute(getCar.carID)#"/>
+						<input type="hidden" name="token" type="hidden" value="#CSRFGenerateToken(session.csrfToken, true)#"/>
 						<div class="form-group">
 							<label for="make">Make</label>
 							<select name="makeID" id="make" class="custom-select customizeable">
 								<option value="">--Select--</option>
 								<cfloop query="#getMakes#">
-									<option value="#getMakes.makeID#"<cfif getCar.makeID eq getMakes.makeID> selected="selected"</cfif>>#getMakes.longName#</option>
+									<option value="#encodeForHTMLAttribute(getMakes.makeID)#"<cfif getCar.makeID eq getMakes.makeID> selected="selected"</cfif>>#encodeForHTML(getMakes.longName)#</option>
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
@@ -79,7 +82,7 @@
 							<select name="modelID" id="model" class="custom-select customizeable">
 								<option value="">--Select--</option>
 								<cfloop query="#getModels#">
-									<option value="#getModels.modelID#"<cfif getCar.modelID eq getModels.modelID> selected="selected"</cfif>>#getModels.longName#</option>
+									<option value="#encodeForHTMLAttribute(getModels.modelID)#"<cfif getCar.modelID eq getModels.modelID> selected="selected"</cfif>>#encodeForHTML(getModels.longName)#</option>
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
@@ -90,7 +93,7 @@
 							<select name="categoryID" id="category" class="custom-select">
 								<option value="">--Select--</option>
 								<cfloop query="#getCategories#">
-									<option value="#getCategories.categoryID#"<cfif getCar.categoryID eq getCategories.categoryID> selected="selected"</cfif>>#getCategories.longName#</option>
+									<option value="#encodeForHTMLAttribute(getCategories.categoryID)#"<cfif getCar.categoryID eq getCategories.categoryID> selected="selected"</cfif>>#encodeForHTML(getCategories.longName)#</option>
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
@@ -98,14 +101,14 @@
 						</div>
 						<div class="form-group">
 							<label for="year">Year</label>
-							<input type="text" class="form-control" name="year" id="year" value="#getCar.year#"/>
+							<input type="text" class="form-control" name="year" id="year" value="#encodeForHTMLAttribute(getCar.year)#"/>
 						</div>
 						<div class="form-group">
 							<label for="color">Color</label>
 							<select name="colorID" id="color" class="custom-select customizeable">
 								<option value="">--Select--</option>
 								<cfloop query="#getColors#">
-									<option value="#getColors.colorID#"<cfif getCar.colorID eq getColors.colorID> selected="selected"</cfif>>#getColors.longName#</option>
+									<option value="#encodeForHTMLAttribute(getColors.colorID)#"<cfif getCar.colorID eq getColors.colorID> selected="selected"</cfif>>#encodeForHTML(getColors.longName)#</option>
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
@@ -113,19 +116,19 @@
 						</div>
 						<div class="form-group">
 							<label for="stockNumber">Stock Number</label>
-							<input type="text" class="form-control" name="stockNumber" id="stockNumber" value="#getCar.stockNumber#"/>
+							<input type="text" class="form-control" name="stockNumber" id="stockNumber" value="#encodeForHTMLAttribute(getCar.stockNumber)#"/>
 						</div>
 						<div class="form-group">
 							<label for="listPrice">List Price</label>
-							<input type="text" class="form-control" name="listPrice" id="listPrice" value="#getCar.listPrice#"/>
+							<input type="text" class="form-control" name="listPrice" id="listPrice" value="#encodeForHTMLAttribute(getCar.listPrice)#"/>
 						</div>
 						<div class="form-group">
 							<label for="salePrice">Sale Price</label>
-							<input type="text" class="form-control" name="salePrice" id="salePrice" value="#getCar.salePrice#"/>
+							<input type="text" class="form-control" name="salePrice" id="salePrice" value="#encodeForHTMLAttribute(getCar.salePrice)#"/>
 						</div>
 						<div class="form-group">
 							<label for="description">Description:</label>
-							<textarea id="description" name="description" class="rich-text">#getCar.description#</textarea>
+							<textarea id="description" name="description" class="rich-text">#encodeForHTMLAttribute(getCar.description)#</textarea>
 						</div>
 						<div class="form-group text-right">
 							<a class="btn btn-sm btn-danger" id="cancel" href="admin.cfm">Cancel</a>
