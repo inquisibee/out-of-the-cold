@@ -1,5 +1,5 @@
 <!--- // do some authentication --->
-<cfinclude template="authenticate.cfm"/>
+<cfinclude template="/authenticate.cfm"/>
 
 <cfquery name="getCars" datasource="cartracker">
 	SELECT
@@ -14,7 +14,7 @@
 	ORDER BY c.saleprice;
 </cfquery>
 
-<cfinclude template="includes/cfml/header.cfm"/>
+<cfinclude template="/includes/cfml/header.cfm"/>
 <cfoutput>
 <!-- Area Chart -->
 <div class="card border-0 shadow mb-4">
@@ -47,4 +47,4 @@
 	</div>
 </div>
 </cfoutput>
-<cfinclude template="includes/cfml/footer.cfm"/>
+<cfinclude template="/includes/cfml/footer.cfm"/>

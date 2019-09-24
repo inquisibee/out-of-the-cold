@@ -20,7 +20,7 @@
 	WHERE carID = <cfqueryparam value="#URL.carID#" cfsqltype="cf_sql_integer"/>
 </cfquery>
 
-<cfinclude template="includes/cfml/header.cfm"/>
+<cfinclude template="/includes/cfml/header.cfm"/>
 
 <!-- Area Chart -->
 <cfoutput>
@@ -79,4 +79,4 @@
 	</div>
 </cfoutput>
 
-<cfinclude template="includes/cfml/footer.cfm"/>
+<cfinclude template="/includes/cfml/footer.cfm"/>
