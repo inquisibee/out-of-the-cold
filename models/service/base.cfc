@@ -1,0 +1,3 @@
+component {
+	// more here later
+}

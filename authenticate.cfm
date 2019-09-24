@@ -1,9 +1,13 @@
-<cfif !session.authenticated and !structKeyExists(form, 'username') and !structKeyExists(form, 'password')>
-	<cflocation url="login.cfm"/>
-<cfelseif structKeyExists(form, 'username') and len(form.username) and structKeyExists(form, 'password') and len(form.password)>
-	<!--- // TODO Add some real authentication please ... --->
-	<cfset session.authenticated = true>
-	<cfif structKeyExists(form, 'redirectURL') and len(form.redirectURL)>
-		<cflocation url="#form.redirectURL#" addToken="yes"/>
-	</cfif>
-</cfif>
+<cfscript>
+	// if we aren't authenticated but we are trying to authenticate
+	if( !session.authenticated and !structKeyExists(form, 'username') and !structKeyExists(form, 'password') ){
+		location( url="login.cfm" );
+	} else if ( structKeyExists(form, 'username') and len(form.username) and structKeyExists(form, 'password') and len(form.password) ){
+		// TODOD add some real authentication
+		session.authenticated = true;
+		// if we have a place to redirct to
+		if( structKeyExists(form, 'redirectURL') and len(form.redirectURL) ){
+			location( url="#form.redirectURL#");
+		}
+	} 
+</cfscript>

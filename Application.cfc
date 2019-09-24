@@ -18,11 +18,20 @@ component {
 
 	// application start
 	public boolean function onApplicationStart(){
+		// add services into application scope for easy reuse
+		this.services = {
+			"security" = createObject('component', 'models.service.security')
+		};
 		return true;
 	}
 
 	// request start
 	public boolean function onRequestStart( String targetPage ){
+		if( !structKeyExists(this, 'services') or ( structKeyExists(url, "reload") and url.reload ) ){
+			onApplicationStart();
+		}
+		// check the user
+		this.services['security'].checkAuthentication();
 		return true;
 	}
 

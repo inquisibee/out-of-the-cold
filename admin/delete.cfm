@@ -1,4 +1,4 @@
-<cfinclude template="authenticate.cfm"/>
+<cfinclude template="/authenticate.cfm"/>
 
 <cfscript>
 	transaction {
@@ -24,4 +24,4 @@
 	}
 </cfscript>
 
-<cflocation url="admin.cfm?alert=Car deleted successfully&alertType=success"/>
+<cflocation url="/admin/cars.cfm?alert=Car deleted successfully&alertType=success"/>

@@ -36,7 +36,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/admin.cfm">
+					<a class="nav-link" href="/admin/cars.cfm">
 						<span>Manager</span>
 					</a>
 				</li>
