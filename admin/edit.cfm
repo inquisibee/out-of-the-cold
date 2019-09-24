@@ -1,4 +1,4 @@
-<cfinclude template="authenticate.cfm"/>
+<cfinclude template="/authenticate.cfm"/>
 
 <cfparam name="url.carID" default="0"/>
 
@@ -50,13 +50,13 @@
 	ORDER BY longName
 </cfquery>
 
-<cfinclude template="includes/cfml/header.cfm"/>
+<cfinclude template="/includes/cfml/header.cfm"/>
 
 <!-- Area Chart -->
 <cfoutput>
 	<div class="card border-0 shadow mb-4">
 		<div class="card-header border-0 py-3 d-flex flex-row align-items-center justify-content-between">
-			<h6 class="m-0 font-weight-bold text-primary">Car Details</h6><a href="admin.cfm" class="btn btn-sm btn-primary">Back to listings</a>
+			<h6 class="m-0 font-weight-bold text-primary">Car Details</h6><a href="/admin/cars.cfm" class="btn btn-sm btn-primary">Back to listings</a>
 			<!-- Card Header Dropdown -->
 		</div>
 
@@ -130,7 +130,7 @@
 							<textarea id="description" name="description" class="rich-text">#getCar.description#</textarea>
 						</div>
 						<div class="form-group text-right">
-							<a class="btn btn-sm btn-danger" id="cancel" href="admin.cfm">Cancel</a>
+							<a class="btn btn-sm btn-danger" id="cancel" href="/admin/cars.cfm">Cancel</a>
 							<button type="submit" class="btn btn-sm btn-primary">Save</button>
 					</form>
 				</div>
@@ -139,4 +139,4 @@
 	</div>
 </cfoutput>
 
-<cfinclude template="includes/cfml/footer.cfm"/>
+<cfinclude template="/includes/cfml/footer.cfm"/>

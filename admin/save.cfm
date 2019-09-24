@@ -1,4 +1,4 @@
-<cfinclude template="authenticate.cfm"/>
+<cfinclude template="/authenticate.cfm"/>
 
 
 <cfscript>
@@ -75,4 +75,4 @@ transaction {
 	}
 }
 </cfscript>
-<cflocation url="admin.cfm?alert=Car #action# successfully&alertType=success"/>
+<cflocation url="/admin/cars.cfm?alert=Car #action# successfully&alertType=success"/>

@@ -12,7 +12,7 @@
 </cfquery>
 
 <cfoutput>
-<cfinclude template="includes/cfml/header.cfm"/>
+<cfinclude template="/includes/cfml/header.cfm"/>
 <!-- Area Chart -->
 <div class="card border-0 shadow mb-4">
 	<div class="card-header border-0 py-3 d-flex flex-row align-items-center justify-content-between">
@@ -40,5 +40,5 @@
 		</cfloop>
 	</div>
 </div>
-<cfinclude template="includes/cfml/footer.cfm"/>
+<cfinclude template="/includes/cfml/footer.cfm"/>
 </cfoutput>
