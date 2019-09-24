@@ -16,6 +16,8 @@ component extends="models.service.baseService" {
 			if( structKeyExists(form, 'redirectURL') and len(form.redirectURL) ){
 				location( url="#form.redirectURL#");
 			}
+		} else if( structKeyExists(form, 'username') and !len(form.username) and structKeyExists(form, 'password') and !len(form.password) ){
+			location( url="/login.cfm?redirectURL=#cgi.script_name#" );
 		}
 
 	}
