@@ -213,5 +213,16 @@
 	"watchConfigFilesForChangesInterval": 120,
 	"websocketEnabled": false,
 	"weinreRemoteInspectionEnabled": false,
-	"whitespaceManagement": "smart"
+	"whitespaceManagement": "smart",
+	"datasources": {
+		"cartracker": {
+			"database": "cartracker",
+			"dbdriver": "MySQL5",
+			"host": "${DB_HOST}",
+			"password": "${DB_PASSWORD}",
+			"port": "${DB_PORT}",
+			"username": "${DB_USERNAME}",
+			"allowMultiQueries": true
+		}
+	}
 }
