@@ -1,17 +1,6 @@
 <cfparam name="url.carID" default="12"/>
 
-<cfquery name="getCar" datasource="cartracker">
-	SELECT
-		c.*,
-		ma.longName as make,
-		mo.longName as model,
-		co.longName as color
-	FROM Car c
-	JOIN Make ma ON c.makeID = ma.makeID
-	JOIN Model mo ON c.modelID = mo.modelID
-	JOIN Color co ON c.colorID = co.colorID
-	WHERE carID = <cfqueryparam value="#URL.carID#" cfsqltype="cf_sql_integer"/>
-</cfquery>
+<cfset getCar = request.services.carDAO.getCar(url.carID)/>
 
 <!--- // images --->
 <cfquery name="getImages" datasource="cartracker">

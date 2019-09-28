@@ -1,15 +1,4 @@
-<cfquery name="getCars" datasource="cartracker">
-	SELECT
-		c.*,
-		ma.longName as make,
-		mo.longName as model,
-		co.longName as color
-	FROM Car c
-	INNER JOIN Make ma ON c.makeID = ma.makeID
-	INNER JOIN Model mo ON c.modelID = mo.modelID
-	INNER JOIN Color co ON c.colorID = co.colorID
-	ORDER BY c.saleprice;
-</cfquery>
+<cfset getCars = request.services.carDAO.getAll()/>
 
 <cfoutput>
 <cfinclude template="/includes/cfml/header.cfm"/>

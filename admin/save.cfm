@@ -1,5 +1,3 @@
-<cfinclude template="/authenticate.cfm"/>
-
 <cfscript>
 
 if( !CSRFverifyToken(form.token, session.csrfToken) ){

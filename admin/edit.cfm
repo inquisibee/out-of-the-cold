@@ -1,5 +1,3 @@
-<cfinclude template="/authenticate.cfm"/>
-
 <cfparam name="url.carID" default="0"/>
 
 <cfquery name="getCar" datasource="cartracker">

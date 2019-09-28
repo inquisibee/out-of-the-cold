@@ -1,5 +1,3 @@
-<cfinclude template="/authenticate.cfm"/>
-
 <cfscript>
 	transaction {
 		queryService = new Query();

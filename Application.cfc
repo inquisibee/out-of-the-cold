@@ -20,8 +20,10 @@ component {
 	public boolean function onApplicationStart(){
 		// add services into application scope for easy reuse
 		this.services = {
-			"security" = createObject('component', 'models.service.security')
+			"security" = createObject('component', 'models.service.Security'),
+			"carDAO" = createObject('component', 'models.service.CarDAO')
 		};
+		request.services = this.services;
 		return true;
 	}
 
@@ -30,8 +32,10 @@ component {
 		if( !structKeyExists(this, 'services') or ( structKeyExists(url, "reload") and url.reload ) ){
 			onApplicationStart();
 		}
+		// set services into request scope for global usage
+		request.services = this.services;
 		// check the user
-		this.services['security'].checkAuthentication();
+		request.services['security'].checkAuthentication();
 		return true;
 	}
 
