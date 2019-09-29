@@ -1,12 +1,12 @@
 <cfparam name="url.carID" default="0"/>
 
 <cfscript>
-	qryCar = application.services.carService.getCar(url.carID);
-	qryImages = application.services.carService.getImagesForCar(url.carID);
-	qryMakes = application.services.carService.getMakes();
-	qryModels = application.services.carService.getModels();
-	qryColors = application.services.carService.getColors();
-	qryCategories = application.services.carService.getCategories();
+	qryCar = request.services.carService.getCar(url.carID);
+	qryImages = request.services.carService.getImagesForCar(url.carID);
+	qryMakes = request.services.carService.getMakes();
+	qryModels = request.services.carService.getModels();
+	qryColors = request.services.carService.getColors();
+	qryCategories = request.services.carService.getCategories();
 </cfscript>
 
 <cfinclude template="/includes/cfml/header.cfm"/>

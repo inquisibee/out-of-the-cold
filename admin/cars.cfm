@@ -1,4 +1,4 @@
-<cfset qryCars = application.services.carService.getCars()/>
+<cfset qryCars = request.services.carService.getCars()/>
 <cfinclude template="/includes/cfml/header.cfm"/>
 <cfoutput>
 <!-- Area Chart -->
