@@ -1,4 +1,4 @@
-<cfset qryCars = request.services.carService.getCars()/>
+<cfset qryCars = request.wirebox.getInstance("CarService").getCars()/>
 
 <cfoutput>
 <cfinclude template="/includes/cfml/header.cfm"/>

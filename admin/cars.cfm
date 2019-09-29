@@ -1,4 +1,4 @@
-<cfset qryCars = application.services.carService.getCars()/>
+<cfset qryCars = request.wirebox.getInstance("CarService").getCars()/>
 <cfinclude template="/includes/cfml/header.cfm"/>
 <cfoutput>
 <!-- Area Chart -->

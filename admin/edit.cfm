@@ -1,12 +1,12 @@
 <cfparam name="url.carID" default="0"/>
 
 <cfscript>
-	qryCar = application.services.carService.getCar(url.carID);
-	qryImages = application.services.carService.getImagesForCar(url.carID);
-	qryMakes = application.services.carService.getMakes();
-	qryModels = application.services.carService.getModels();
-	qryColors = application.services.carService.getColors();
-	qryCategories = application.services.carService.getCategories();
+	qryCar = request.wirebox.getInstance("CarService").getCar(url.carID);
+	qryImages = request.wirebox.getInstance("CarService").getImagesForCar(url.carID);
+	qryMakes = request.wirebox.getInstance("CarService").getMakes();
+	qryModels = request.wirebox.getInstance("CarService").getModels();
+	qryColors = request.wirebox.getInstance("CarService").getColors();
+	qryCategories = request.wirebox.getInstance("CarService").getCategories();
 </cfscript>
 
 <cfinclude template="/includes/cfml/header.cfm"/>

@@ -1,2 +1,2 @@
-<cfset action = application.services.carService.saveCar( formScope = form )/>
+<cfset action = request.wirebox.getInstance("CarService").saveCar( formScope = form )/>
 <cflocation url="/admin/cars.cfm?alert=Car #action# successfully&alertType=success"/>

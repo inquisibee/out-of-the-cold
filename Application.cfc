@@ -22,10 +22,7 @@ component {
 
 	// application start
 	public boolean function onApplicationStart(){
-		application.services = {
-			"security" = createObject("component", "models.service.Security"),
-			"carService" = createObject("component", "models.service.CarService")
-		};
+		this.wirebox = new wirebox.system.ioc.Injector('config.Wirebox');
 		return true;
 	}
 
@@ -35,9 +32,9 @@ component {
 			onApplicationStart();
 		}
 		// put services into request scope
-		request.services = application.services;
+		request.wirebox = application.wirebox;
 		// check the user
-		request.services.security.checkAuthentication();
+		request.wirebox.getInstance('Security').checkAuthentication();
 		return true;
 	}
 

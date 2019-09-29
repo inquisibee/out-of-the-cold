@@ -1,40 +1,42 @@
-component extends="models.service.BaseService" {
+component extends="models.service.BaseService" singleton {
+
+	property name="CarDAO" inject="id:carDAO";
 
 	public query function getCar( required string carID ){
-		return createObject("component", "models.service.CarDAO").listByID( carID = arguments.carID );
+		return variables.carDAO.listByID( carID = arguments.carID );
 	}
 
 	public query function getCars(){
-		return createObject("component", "models.service.CarDAO").listAll();
+		return variables.carDAO.listAll();
 	}
 
 	public void function deleteCar( required string carID ){
-		createObject("component", "models.service.CarDAO").delete( carID = arguments.carID );
+		variables.carDAO.delete( carID = arguments.carID );
 	}
 
 	public string function saveCar( required struct formScope ){
-		return createObject("component", "models.service.carDAO").save( formScope = arguments.formScope );
+		return variables.carDAO.save( formScope = arguments.formScope );
 	}
 
 
 	// helper data functions
 	public query function getMakes(){
-		return createObject("component", "models.service.carDAO").listMakes();
+		return variables.carDAO.listMakes();
 	}
 
 	public query function getModels(){
-		return createObject("component", "models.service.carDAO").listModels();
+		return variables.carDAO.listModels();
 	}
 
 	public query function getColors(){
-		return createObject("component", "models.service.carDAO").listColors();
+		return variables.carDAO.listColors();
 	}
 
 	public query function getCategories(){
-		return createObject("component", "models.service.carDAO").listCategories();
+		return variables.carDAO.listCategories();
 	}
 
 	public query function getImagesForCar( required string carID ){
-		return createObject("component", "models.service.carDAO").listImagesByCarID( carID = arguments.carID );
+		return variables.carDAO.listImagesByCarID( carID = arguments.carID );
 	}
 }

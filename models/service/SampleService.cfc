@@ -14,6 +14,7 @@ component extends="models.service.BaseService" singleton {
 	}
 
 	public string function getPrivateBaseVariable1(){
+		super.getPrivateBaseVariable1();
 		return variables.baseVariable1;
 	}
 }

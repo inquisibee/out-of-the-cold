@@ -1,6 +1,6 @@
 <cfparam name="url.carID" default="12"/>
 
-<cfset qryCar = request.services.carService.getCar(url.carID)/>
+<cfset qryCar = request.wirebox.getInstance("CarService").getCar(url.carID)/>
 
 <!--- // images --->
 <cfquery name="getImages" datasource="cartracker">
