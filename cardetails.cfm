@@ -1,6 +1,6 @@
 <cfparam name="url.carID" default="12"/>
 
-<cfset getCar = request.services.carDAO.getCar(url.carID)/>
+<cfset qryCar = request.services.carService.getCar(url.carID)/>
 
 <!--- // images --->
 <cfquery name="getImages" datasource="cartracker">
@@ -20,7 +20,7 @@
 		</div>
 
 		<div class="card-body">
-			<cfif getCar.recordCount>
+			<cfif qryCar.recordCount>
 				<div class="row">
 					<div class="col-md-6">
 						<div id="carousel" class="carousel slide" data-ride="carousel">
@@ -52,12 +52,12 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<h3>#encodeForHTML(getCar.year)# #encodeForHTML(getCar.make)# #encodeForHTML(getCar.model)#</h3>
-						<strong>#encodeForHTML(getCar.color)#</strong><br/>
-						<strong>#encodeForHTML(getCar.transmission)#</strong><br/>
-						<div class="alert alert-success text-center"><strong>$#encodeForHTML(getCar.salePrice)#</strong></div>
-						Stock No: #encodeForHTML(getCar.stockNumber)#<br/>
-						<blockquote>#encodeForHTML(getCar.description)#</blockquote>
+						<h3>#encodeForHTML(qryCar.year)# #encodeForHTML(qryCar.make)# #encodeForHTML(qryCar.model)#</h3>
+						<strong>#encodeForHTML(qryCar.color)#</strong><br/>
+						<strong>#encodeForHTML(qryCar.transmission)#</strong><br/>
+						<div class="alert alert-success text-center"><strong>$#encodeForHTML(qryCar.salePrice)#</strong></div>
+						Stock No: #encodeForHTML(qryCar.stockNumber)#<br/>
+						<blockquote>#qryCar.description#</blockquote>
 					</div>
 				</div>
 			<cfelse>

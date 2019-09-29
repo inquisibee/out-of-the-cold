@@ -14,28 +14,30 @@ component {
 	this.loginStorage = "session";
 	this.datasource="cartracker";
 
+	// STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR APP
+	APP_ROOT_PATH = getDirectoryFromPath( getCurrentTemplatePath() );
 
+	// CREATE APP MAPPINGS
+	this.mappings["/CarTracker"] 	= APP_ROOT_PATH;
 
 	// application start
 	public boolean function onApplicationStart(){
-		// add services into application scope for easy reuse
-		this.services = {
-			"security" = createObject('component', 'models.service.Security'),
-			"carDAO" = createObject('component', 'models.service.CarDAO')
+		application.services = {
+			"security" = createObject("component", "models.service.Security"),
+			"carService" = createObject("component", "models.service.CarService")
 		};
-		request.services = this.services;
 		return true;
 	}
 
 	// request start
 	public boolean function onRequestStart( String targetPage ){
-		if( !structKeyExists(this, 'services') or ( structKeyExists(url, "reload") and url.reload ) ){
+		if( structKeyExists(url, "reload") and url.reload ) {
 			onApplicationStart();
 		}
-		// set services into request scope for global usage
-		request.services = this.services;
+		// put services into request scope
+		request.services = application.services;
 		// check the user
-		request.services['security'].checkAuthentication();
+		request.services.security.checkAuthentication();
 		return true;
 	}
 

@@ -1,52 +1,13 @@
 <cfparam name="url.carID" default="0"/>
 
-<cfquery name="getCar" datasource="cartracker">
-	SELECT
-		c.*,
-		ma.makeID,
-		ma.longName as make,
-		mo.longName as model,
-		mo.modelID,
-		co.colorID,
-		co.longName as color
-	FROM Car c
-	JOIN Make ma ON c.makeID = ma.makeID
-	JOIN Model mo ON c.modelID = mo.modelID
-	JOIN Color co ON c.colorID = co.colorID
-	WHERE carID = <cfqueryparam value="#URL.carID#" cfsqltype="cf_sql_integer"/>
-</cfquery>
-
-<!--- // images --->
-<cfquery name="getImages" datasource="cartracker">
-	SELECT *
-	FROM Image
-	WHERE carID = <cfqueryparam value="#URL.carID#" cfsqltype="cf_sql_integer"/>
-</cfquery>
-
-
-<cfquery name="getMakes" datasource="cartracker">
-	SELECT *
-	FROM Make
-	ORDER BY longName
-</cfquery>
-
-<cfquery name="getModels" datasource="cartracker">
-	SELECT *
-	FROM Model
-	ORDER BY longName
-</cfquery>
-
-<cfquery name="getColors" datasource="cartracker">
-	SELECT *
-	FROM Color
-	ORDER BY longName
-</cfquery>
-
-<cfquery name="getCategories" datasource="cartracker">
-	SELECT *
-	FROM Category
-	ORDER BY longName
-</cfquery>
+<cfscript>
+	qryCar = application.services.carService.getCar(url.carID);
+	qryImages = application.services.carService.getImagesForCar(url.carID);
+	qryMakes = application.services.carService.getMakes();
+	qryModels = application.services.carService.getModels();
+	qryColors = application.services.carService.getColors();
+	qryCategories = application.services.carService.getCategories();
+</cfscript>
 
 <cfinclude template="/includes/cfml/header.cfm"/>
 
@@ -62,14 +23,14 @@
 			<div class="row">
 				<div class="col-md-12">
 					<form action="save.cfm" method="post">
-						<input type="hidden" name="carID" value="#encodeForHTMLAttribute(getCar.carID)#"/>
+						<input type="hidden" name="carID" value="#encodeForHTMLAttribute(qryCar.carID)#"/>
 						<input type="hidden" name="token" type="hidden" value="#CSRFGenerateToken(session.csrfToken, true)#"/>
 						<div class="form-group">
 							<label for="make">Make</label>
 							<select name="makeID" id="make" class="custom-select customizeable">
 								<option value="">--Select--</option>
-								<cfloop query="#getMakes#">
-									<option value="#encodeForHTMLAttribute(getMakes.makeID)#"<cfif getCar.makeID eq getMakes.makeID> selected="selected"</cfif>>#encodeForHTML(getMakes.longName)#</option>
+								<cfloop query="#qryMakes#">
+									<option value="#encodeForHTMLAttribute(qryMakes.makeID)#"<cfif qryCar.makeID eq qryMakes.makeID> selected="selected"</cfif>>#encodeForHTML(qryMakes.longName)#</option>
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
@@ -79,8 +40,8 @@
 							<label for="make">Model</label>
 							<select name="modelID" id="model" class="custom-select customizeable">
 								<option value="">--Select--</option>
-								<cfloop query="#getModels#">
-									<option value="#encodeForHTMLAttribute(getModels.modelID)#"<cfif getCar.modelID eq getModels.modelID> selected="selected"</cfif>>#encodeForHTML(getModels.longName)#</option>
+								<cfloop query="#qryModels#">
+									<option value="#encodeForHTMLAttribute(qryModels.modelID)#"<cfif qryCar.modelID eq qryModels.modelID> selected="selected"</cfif>>#encodeForHTML(qryModels.longName)#</option>
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
@@ -90,8 +51,8 @@
 							<label for="category">Category</label>
 							<select name="categoryID" id="category" class="custom-select">
 								<option value="">--Select--</option>
-								<cfloop query="#getCategories#">
-									<option value="#encodeForHTMLAttribute(getCategories.categoryID)#"<cfif getCar.categoryID eq getCategories.categoryID> selected="selected"</cfif>>#encodeForHTML(getCategories.longName)#</option>
+								<cfloop query="#qryCategories#">
+									<option value="#encodeForHTMLAttribute(qryCategories.categoryID)#"<cfif qryCar.categoryID eq qryCategories.categoryID> selected="selected"</cfif>>#encodeForHTML(qryCategories.longName)#</option>
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
@@ -99,14 +60,14 @@
 						</div>
 						<div class="form-group">
 							<label for="year">Year</label>
-							<input type="text" class="form-control" name="year" id="year" value="#encodeForHTMLAttribute(getCar.year)#"/>
+							<input type="text" class="form-control" name="year" id="year" value="#encodeForHTMLAttribute(qryCar.year)#"/>
 						</div>
 						<div class="form-group">
 							<label for="color">Color</label>
 							<select name="colorID" id="color" class="custom-select customizeable">
 								<option value="">--Select--</option>
-								<cfloop query="#getColors#">
-									<option value="#encodeForHTMLAttribute(getColors.colorID)#"<cfif getCar.colorID eq getColors.colorID> selected="selected"</cfif>>#encodeForHTML(getColors.longName)#</option>
+								<cfloop query="#qryColors#">
+									<option value="#encodeForHTMLAttribute(qryColors.colorID)#"<cfif qryCar.colorID eq qryColors.colorID> selected="selected"</cfif>>#encodeForHTML(qryColors.longName)#</option>
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
@@ -114,19 +75,19 @@
 						</div>
 						<div class="form-group">
 							<label for="stockNumber">Stock Number</label>
-							<input type="text" class="form-control" name="stockNumber" id="stockNumber" value="#encodeForHTMLAttribute(getCar.stockNumber)#"/>
+							<input type="text" class="form-control" name="stockNumber" id="stockNumber" value="#encodeForHTMLAttribute(qryCar.stockNumber)#"/>
 						</div>
 						<div class="form-group">
 							<label for="listPrice">List Price</label>
-							<input type="text" class="form-control" name="listPrice" id="listPrice" value="#encodeForHTMLAttribute(getCar.listPrice)#"/>
+							<input type="text" class="form-control" name="listPrice" id="listPrice" value="#encodeForHTMLAttribute(qryCar.listPrice)#"/>
 						</div>
 						<div class="form-group">
 							<label for="salePrice">Sale Price</label>
-							<input type="text" class="form-control" name="salePrice" id="salePrice" value="#encodeForHTMLAttribute(getCar.salePrice)#"/>
+							<input type="text" class="form-control" name="salePrice" id="salePrice" value="#encodeForHTMLAttribute(qryCar.salePrice)#"/>
 						</div>
 						<div class="form-group">
 							<label for="description">Description:</label>
-							<textarea id="description" name="description" class="rich-text">#encodeForHTMLAttribute(getCar.description)#</textarea>
+							<textarea id="description" name="description" class="rich-text">#encodeForHTMLAttribute(qryCar.description)#</textarea>
 						</div>
 						<div class="form-group text-right">
 							<a class="btn btn-sm btn-danger" id="cancel" href="/admin/cars.cfm">Cancel</a>
