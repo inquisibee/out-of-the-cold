@@ -2,7 +2,11 @@
     "dependencies":{
         "wirebox":"^5.6.2+1021"
     },
+    "devDependencies":{
+        "testbox":"^3.1.0+339"
+    },
     "installPaths":{
+        "testbox":"testbox/",
         "wirebox":"wirebox/"
     }
 }

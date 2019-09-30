@@ -14,7 +14,7 @@ component extends="models.service.BaseService" singleton {
 		variables.carDAO.delete( carID = arguments.carID );
 	}
 
-	public string function saveCar( required struct formScope ){
+	public struct function saveCar( required struct formScope ){
 		return variables.carDAO.save( formScope = arguments.formScope );
 	}
 

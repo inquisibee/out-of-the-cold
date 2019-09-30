@@ -112,7 +112,12 @@ component extends="models.service.BaseDAO" singleton {
 		return queryService.execute().getResult();
 	}
 
-	public string function save( required struct formScope ){
+	public struct function save( required struct formScope ){
+
+		results = {
+			action = "",
+			carID = ""
+		};
 
 		if( !CSRFverifyToken(arguments.formScope.token, session.csrfToken) ){
 			throw("Invalid token");
@@ -141,6 +146,17 @@ component extends="models.service.BaseDAO" singleton {
 
 		if( arrayLen(validationErrors) ){
 			throw("The following errors have occurred - please go back and make changes<br/>" & arrayToList(validationErrors, '<br/>'));
+		}
+
+		// default some values for making new
+		if( !structKeyExists(arguments.formScope, "newMake") ){
+			arguments.formScope.newMake = '';
+		}
+		if( !structKeyExists(arguments.formScope, "newModel") ){
+			arguments.formScope.newModel = '';
+		}
+		if( !structKeyExists(arguments.formScope, "newColor") ){
+			arguments.formScope.newColor = '';
 		}
 
 		transaction {
@@ -200,15 +216,22 @@ component extends="models.service.BaseDAO" singleton {
 			if( len(arguments.formScope.carID) and arguments.formScope.carID neq 0 ){
 				queryService.addParam(name="carID", value="#arguments.formScope.carID#");
 				queryService.setSQL("UPDATE Car set makeID = :makeID, modelID = :modelID, categoryID = :categoryID, year = :year, listPrice = :listPrice, salePrice = :salePrice, acquisitionDate = :acquisitionDate, colorID = :colorID, stockNumber = :stockNumber, statusID = :statusID, description = :description WHERE carID = :carID ");
-				var action = 'saved';
+				results ={
+					carID = arguments.formScope.carID,
+					action = 'saved'
+				 };
 			} else {
-				queryService.addParam(name="carID", value="#getNewID('car')#");
+				var newCarID = getNewID('car');
+				queryService.addParam(name="carID", value="#newCarID#");
 				queryService.setSQL("INSERT INTO Car ( carID, makeID, modelID, categoryID, year, listPrice, salePrice, acquisitionDate, colorID, stockNumber, statusID, description ) VALUES ( :carID, :makeID, :modelID, :categoryID, :year, :listPrice, :salePrice, :acquisitionDate, :colorID, :stockNumber, :statusID, :description )");
-				var action = 'added';
+				results = {
+					carID = newCarID,
+					action = 'added'
+				};
 			}
 			queryService.execute();
 
-			return action;
+			return results;
 		}
 	}
 
@@ -224,7 +247,7 @@ component extends="models.service.BaseDAO" singleton {
 		transaction {
 			var queryService = new Query();
 			queryService.setDatasource('cartracker');
-			queryService.addParam(name="carID", value="#url.carID#");
+			queryService.addParam(name="carID", value="#arguments.carID#");
 
 			// delete images
 			queryService.setSQL("DELETE FROM Image WHERE carID = :carID");

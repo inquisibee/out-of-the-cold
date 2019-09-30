@@ -12,7 +12,7 @@ component {
 	this.sessionTimeout = createTimespan( 0, 0, 30, 0 );
 	this.setClientCookies = true;
 	this.loginStorage = "session";
-	this.datasource="cartracker";
+	this.datasource = "cartracker";
 
 	// STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR APP
 	APP_ROOT_PATH = getDirectoryFromPath( getCurrentTemplatePath() );
