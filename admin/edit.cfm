@@ -97,7 +97,7 @@
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
-							<input type="text" class="form-control form-text d-none" name="newmodel" id="newmodel"/>
+							<input type="text" class="form-control form-text d-none" name="newCategory" id="newCategory"/>
 						</div>
 						<div class="form-group">
 							<label for="year">Year</label>
