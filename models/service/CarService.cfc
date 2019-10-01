@@ -2,11 +2,11 @@ component extends="models.service.BaseService" singleton {
 
 	property name="CarDAO" inject="id:carDAO";
 
-	public query function getCar( required string carID ){
+	public Car function getCar( required string carID ){
 		return variables.carDAO.listByID( carID = arguments.carID );
 	}
 
-	public query function getCars(){
+	public array function getCars(){
 		return variables.carDAO.listAll();
 	}
 
@@ -20,23 +20,48 @@ component extends="models.service.BaseService" singleton {
 
 
 	// helper data functions
-	public query function getMakes(){
+	public array function getMakes(){
 		return variables.carDAO.listMakes();
 	}
 
-	public query function getModels(){
+	public array function getModels(){
 		return variables.carDAO.listModels();
 	}
 
-	public query function getColors(){
+	public array function getColors(){
 		return variables.carDAO.listColors();
 	}
 
-	public query function getCategories(){
+	public array function getCategories(){
 		return variables.carDAO.listCategories();
 	}
 
-	public query function getImagesForCar( required string carID ){
+	public array function getImagesForCar( required string carID ){
 		return variables.carDAO.listImagesByCarID( carID = arguments.carID );
+	}
+
+	// ORM functions
+	public models.orm.Car function findCarByID( required string carID ){
+		return variables.carDAO.findCarByID( arguments.carID );
+	}
+
+	public array function findAllCars(){
+		return variables.carDAO.findAllCars();
+	}
+
+	public array function findAllMakes(){
+		return variables.carDAO.findAllMakes();
+	}
+
+	public array function findAllModels(){
+		return variables.carDAO.findAllModels();
+	}
+
+	public array function findAllColors(){
+		return variables.carDAO.findAllColors();
+	}
+
+	public array function findAllCategories(){
+		return variables.carDAO.findAllCategories();
 	}
 }

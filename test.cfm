@@ -1,6 +1,6 @@
 // index.cfm
 <cfscript>
-	sampleService = createObject('component', 'models.service.SampleService');
+	/*sampleService = createObject('component', 'models.service.SampleService');
 	writeOutput("<br/>public variable: ");
 	writeDump(sampleService.getPublicVariable1());
 	writeOutput("<br/>private variable: ");
@@ -11,5 +11,10 @@
 	writeDump(sampleService.getPublicBaseVariable1());
 	writeOutput("<br/>base private variable: ");
 	writeDump(sampleService.getPrivateBaseVariable1());
-	writeOutput("<br/>");
+	writeOutput("<br/>");*/
+
+
+	// get a particular instance of the car bean
+	carArray = entityLoad("Car", 11);
+	writeDump(carArray);
 </cfscript>

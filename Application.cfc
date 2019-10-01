@@ -20,6 +20,17 @@ component {
 	// CREATE APP MAPPINGS
 	this.mappings["/CarTracker"] 	= APP_ROOT_PATH;
 
+	// ORM Settings
+	this.ormenabled = true;
+	this.ormsettings = {
+		cfclocation : "models/orm",
+		datasource : "CarTracker",
+		// Logging is on so you can see and debug any issues
+		logsql : true,
+		flushAtRequestEnd : false,
+		autoManageSession : false
+	};
+
 	// application start
 	public boolean function onApplicationStart(){
 		this.wirebox = new wirebox.system.ioc.Injector('config.Wirebox');
@@ -31,6 +42,8 @@ component {
 		if( structKeyExists(url, "reload") and url.reload ) {
 			onApplicationStart();
 		}
+		this.wirebox = new wirebox.system.ioc.Injector('config.Wirebox');
+		ormReload();
 		// put services into request scope
 		request.wirebox = application.wirebox;
 		// check the user

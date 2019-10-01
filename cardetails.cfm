@@ -1,13 +1,6 @@
 <cfparam name="url.carID" default="12"/>
 
-<cfset qryCar = request.wirebox.getInstance("CarService").getCar(url.carID)/>
-
-<!--- // images --->
-<cfquery name="getImages" datasource="cartracker">
-	SELECT *
-	FROM Image
-	WHERE carID = <cfqueryparam value="#URL.carID#" cfsqltype="cf_sql_integer"/>
-</cfquery>
+<cfset car = request.wirebox.getInstance("CarService").findCarByID(url.carID)/>
 
 <cfinclude template="/includes/cfml/header.cfm"/>
 
@@ -20,24 +13,24 @@
 		</div>
 
 		<div class="card-body">
-			<cfif qryCar.recordCount>
+			<cfif !isNull(car.getCarID())>
 				<div class="row">
 					<div class="col-md-6">
 						<div id="carousel" class="carousel slide" data-ride="carousel">
 							<ol class="carousel-indicators">
-								<cfloop from="1" to="#getImages.recordCount#" index="itm">
+								<cfloop from="1" to="#arrayLen(car.getImages())#" index="itm">
 									<li data-target="##carouselExampleIndicators" data-slide-to="#itm#-1"#itm eq 1 ? 'class="active"' : ''#></li>
 								</cfloop>
 							</ol>
 							<div class="carousel-inner">
-								<cfif !getImages.recordCount>
+								<cfif !arrayLen(car.getImages())>
 									<div class="carousel-item active">
 										<img class="d-block w-100" src="/includes/images/cars/placeholderCar.png" alt=""/>
 									</div>
 								</cfif>
-								<cfloop query="#getImages#">
-									<div class="carousel-item #getImages.currentRow eq 1 ? 'active' : ''#">
-										<img class="d-block w-100" src="#encodeForHTMLAttribute(getImages.path)#" alt=""/>
+								<cfloop from="1" to="#arrayLen(car.getImages())#" index="itm">
+									<div class="carousel-item #itm eq 1 ? 'active' : ''#">
+										<img class="d-block w-100" src="#encodeForHTMLAttribute(car.getImages()[itm].getPath())#" alt=""/>
 									</div>
 								</cfloop>
 								<a class="carousel-control-prev" href="##carousel" role="button" data-slide="prev">
@@ -52,12 +45,12 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<h3>#encodeForHTML(qryCar.year)# #encodeForHTML(qryCar.make)# #encodeForHTML(qryCar.model)#</h3>
-						<strong>#encodeForHTML(qryCar.color)#</strong><br/>
-						<strong>#encodeForHTML(qryCar.transmission)#</strong><br/>
-						<div class="alert alert-success text-center"><strong>$#encodeForHTML(qryCar.salePrice)#</strong></div>
-						Stock No: #encodeForHTML(qryCar.stockNumber)#<br/>
-						<blockquote>#qryCar.description#</blockquote>
+						<h3>#encodeForHTML(car.getYear())# #encodeForHTML(car.getMake().getLongName())# #encodeForHTML(car.getModel().getLongName())#</h3>
+						<strong>#encodeForHTML(car.getColor().getLongName())#</strong><br/>
+						<strong>#encodeForHTML(car.getTransmission())#</strong><br/>
+						<div class="alert alert-success text-center"><strong>$#encodeForHTML(car.getSalePrice())#</strong></div>
+						Stock No: #encodeForHTML(car.getStockNumber())#<br/>
+						<blockquote>#car.getDescription()#</blockquote>
 					</div>
 				</div>
 			<cfelse>
