@@ -36,7 +36,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/admin/cars.cfm">
+					<a class="nav-link" href="#event.buildLink( 'manager.index ')#">
 						<span>Manager</span>
 					</a>
 				</li>

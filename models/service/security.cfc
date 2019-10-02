@@ -1,25 +1,21 @@
 component extends="models.service.BaseService" singleton {
 
-	public void function checkAuthentication () {
+	public boolean function isAuthenticated ( event, rc, prc ) {
 
-		if( cgi.script_name eq "/login.cfm" or !findNoCase('/admin', cgi.script_name) ){
-			return;
+		// its simple now -- are we authenticated???
+		if( !session.authenticated  ){
+			return false;
 		}
+		return true;
+	}
 
-		// if we aren't authenticated but we are trying to authenticate
-		if( !session.authenticated and !structKeyExists(form, 'username') and !structKeyExists(form, 'password') ){
-			location( url="/login.cfm?redirectURL=#cgi.script_name#" ); // establish a variable that will keep track of where they came from
-		} else if ( structKeyExists(form, 'username') and len(form.username) and structKeyExists(form, 'password') and len(form.password) ){
+	public boolean function authenticate( event, rc, prc ){
+
+		if ( structKeyExists(rc, 'username') and len(rc.username) and structKeyExists(rc, 'password') and len(rc.password) ){
 			// TODOD add some real authentication
 			session.authenticated = true;
-			// if we have a place to redirct to
-			if( structKeyExists(form, 'redirectURL') and len(form.redirectURL) ){
-				location( url="#form.redirectURL#");
-			}
-		} else if( structKeyExists(form, 'username') and !len(form.username) and structKeyExists(form, 'password') and !len(form.password) ){
-			location( url="/login.cfm?redirectURL=#cgi.script_name#" );
 		}
-
+		return session.authenticated;
 	}
 
 }
