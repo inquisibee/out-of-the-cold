@@ -37,7 +37,7 @@ function CustomizeableSelect() {
 						return false;
 					}
 				});
-				//_self.model.form.submit();
+				_self.model.form.submit();
 				return true;
 		})
 	}
