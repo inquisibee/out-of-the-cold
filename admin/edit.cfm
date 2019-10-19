@@ -131,7 +131,7 @@
 						</div>
 						<div class="form-group text-right">
 							<a class="btn btn-sm btn-danger" id="cancel" href="/admin/cars.cfm">Cancel</a>
-							<button type="button" id="submit" class="btn btn-sm btn-primary">Save</button>
+							<button type="button" id="save" class="btn btn-sm btn-primary">Save</button>
 					</form>
 				</div>
 			</div>
