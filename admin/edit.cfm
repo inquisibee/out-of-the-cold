@@ -56,7 +56,7 @@
 <cfoutput>
 	<div class="card border-0 shadow mb-4">
 		<div class="card-header border-0 py-3 d-flex flex-row align-items-center justify-content-between">
-			<h6 class="m-0 font-weight-bold text-primary">Car Details</h6><a href="/admin/cars.cfm" class="btn btn-sm btn-primary">Back to listings</a>
+			<h6 class="m-0 font-weight-bold text-primary">Car Details</h6><a href="/admin/cars.cfm" class="btn btn-sm btn-primary">Back to Manager</a>
 			<!-- Card Header Dropdown -->
 		</div>
 

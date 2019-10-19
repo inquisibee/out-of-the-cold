@@ -8,7 +8,7 @@
 	</div>
 	<div class="card-body">
 		<form action="authenticate.cfm" method="post">
-			<input type="hidden" name="redirectURL" value="#(structKeyExists(url, 'redirectURL')) ? url.redirectURL : 'admin.cfm'#" />
+			<input type="hidden" name="redirectURL" value="#(structKeyExists(url, 'redirectURL')) ? url.redirectURL : '/admin/cars.cfm'#" />
 			<div class="row mb-2">
 				<div class="col-md-2">Username</div>
 				<div class="col-md-2"><input type="text" name="username"/></div>
