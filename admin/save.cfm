@@ -2,12 +2,14 @@
 
 
 <cfscript>
+
 transaction {
 	// are we adding a new make»
 	if( len(form.newMake) ){
 		makeQuery = new Query();
 		makeQuery.setDatasource('cartracker');
-		event.setValue('makeID', getNewID('make'));
+		// reset the form field variable with the new value
+		form['makeID'] = getNewID('make');
 		makeQuery.addParam(name="longName", value="#form.newMake#");
 		makeQuery.addParam(name="makeID", value="#form.makeID#", cfsqltype="cf_sql_integer");
 		makeQuery.setSQL("INSERT INTO Make(makeID, longName) VALUES(:makeID, :longName)");
@@ -18,20 +20,30 @@ transaction {
 	if( len(form.newModel) ){
 		modelQuery = new Query();
 		modelQuery.setDatasource('cartracker');
-		event.setValue('modelID', getNewID('model'));
+		form['modelID'] = getNewID('model');
 		modelQuery.addParam(name="longName", value="#form.newmodel#");
 		modelQuery.addParam(name="modelID", value="#form.modelID#");
 		modelQuery.addParam(name="makeID", value="#form.makeID#");
 		modelQuery.setSQL("INSERT INTO Model(modelID, makeID, longName) VALUES(:modelID, :makeID, :longName)");
 		modelQuery.execute();
+	}
 
+	// are we adding a new category
+	if( len(form.newCategory) ){
+	  categoryQuery = new Query();
+	  categoryQuery.setDatasource('cartracker');
+	  form['categoryID'] = getNewID('category');
+	  categoryQuery.addParam(name="longName", value="#form.newcategory#");
+	  categoryQuery.addParam(name="categoryID", value="#form.categoryID#", cfsqltype="cf_sql_integer");
+	  categoryQuery.setSQL("INSERT INTO Category(categoryID, longName) VALUES(:categoryID, :longName)");
+	  categoryQuery.execute();
 	}
 
 	// are we adding a new color
 	if( len(form.newColor) ){
 		colorQuery = new Query();
 		colorQuery.setDatasource('cartracker');
-		event.setValue('colorID', getNewID('color'));
+		form['colorID'] = getNewID('color');
 		colorQuery.addParam(name="longName", value="#form.newcolor#");
 		colorQuery.addParam(name="colorID", value="#form.colorID#", cfsqltype="cf_sql_integer");
 		colorQuery.setSQL("INSERT INTO Color(colorID, longName) VALUES(:colorID, :longName)");

@@ -63,7 +63,7 @@
 		<div class="card-body">
 			<div class="row">
 				<div class="col-md-12">
-					<form action="save.cfm" method="post">
+					<form action="save.cfm" method="post" id="car">
 						<input type="hidden" name="carID" value="#getCar.carID#"/>
 						<div class="form-group">
 							<label for="make">Make</label>
@@ -89,14 +89,14 @@
 						</div>
 						<div class="form-group">
 							<label for="category">Category</label>
-							<select name="categoryID" id="category" class="custom-select">
+							<select name="categoryID" id="category" class="custom-select customizeable">
 								<option value="">--Select--</option>
 								<cfloop query="#getCategories#">
 									<option value="#getCategories.categoryID#"<cfif getCar.categoryID eq getCategories.categoryID> selected="selected"</cfif>>#getCategories.longName#</option>
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
-							<input type="text" class="form-control form-text d-none" name="newCategory" id="newCategory"/>
+							<input type="text" class="form-control form-text d-none" name="newcategory" id="newcategory"/>
 						</div>
 						<div class="form-group">
 							<label for="year">Year</label>
@@ -131,7 +131,7 @@
 						</div>
 						<div class="form-group text-right">
 							<a class="btn btn-sm btn-danger" id="cancel" href="/admin/cars.cfm">Cancel</a>
-							<button type="submit" class="btn btn-sm btn-primary">Save</button>
+							<button type="button" id="submit" class="btn btn-sm btn-primary">Save</button>
 					</form>
 				</div>
 			</div>
