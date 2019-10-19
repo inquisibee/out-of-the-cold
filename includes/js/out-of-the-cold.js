@@ -19,13 +19,34 @@ function CustomizeableSelect() {
 	_self.getModel = function() {
 		var model = {
 			selects: $('.customizeable'),
+			submit: $('#save'),
+			form: $('#car'),
+			valid: true
 		}
 		return model;
 	}
 
 	_self.bind = function() {
 		_self.model.selects.bind("change", _self.showCustom)
+		_self.model.submit.bind("click", function(){
+				// assume everything is good
+				_self.model.valid = true;
+				// make sure if any of the selects are 'other' that they have value
+				_self.model.selects.each( function(index){
+					var other = $('#new' + $(this).attr('id'));
+					if( $(this).val() == 'other' && other.val().length == 0 ){
+						alert("Please make sure you provide a new value for 'other'");
+						other.focus();
+						_self.model.valid = false;
+						return false;
+					}
+				});
 
+				if( _self.model.valid ){
+					_self.model.form.submit();
+				}
+				return true;
+		})
 	}
 
 	_self.init = function() {
