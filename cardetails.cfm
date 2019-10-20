@@ -1,6 +1,6 @@
 <cfparam name="url.carID" default="12"/>
 
-<cfquery name="getCar" datasource="cartracker">
+<cfquery name="qryCar" datasource="cartracker">
 	SELECT
 		c.*,
 		ma.longName as make,
@@ -31,7 +31,7 @@
 		</div>
 
 		<div class="card-body">
-			<cfif getCar.recordCount>
+			<cfif qryCar.recordCount>
 				<div class="row">
 					<div class="col-md-6">
 						<div id="carousel" class="carousel slide" data-ride="carousel">
@@ -63,12 +63,12 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<h3>#getCar.year# #getCar.make# #getCar.model#</h3>
-						<strong>#getCar.color#</strong><br/>
-						<strong>#getCar.transmission#</strong><br/>
-						<div class="alert alert-success text-center"><strong>$#getCar.salePrice#</strong></div>
-						Stock No: #getCar.stockNumber#<br/>
-						<blockquote>#getCar.description#</blockquote>
+						<h3>#qryCar.year# #qryCar.make# #qryCar.model#</h3>
+						<strong>#qryCar.color#</strong><br/>
+						<strong>#qryCar.transmission#</strong><br/>
+						<div class="alert alert-success text-center"><strong>$#qryCar.salePrice#</strong></div>
+						Stock No: #qryCar.stockNumber#<br/>
+						<blockquote>#qryCar.description#</blockquote>
 					</div>
 				</div>
 			<cfelse>
