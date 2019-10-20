@@ -1,6 +1,6 @@
 <cfinclude template="/authenticate.cfm"/>
 
-<cfquery name="getCars" datasource="cartracker">
+<cfquery name="qryCars" datasource="cartracker">
 	SELECT
 		c.*,
 		ma.longName as make,
@@ -30,16 +30,16 @@
 			<div class="col-md-2 border-bottom text-right">Sale</div>
 			<div class="col-md-2 border-bottom"></div>
 		</div>
-		<cfloop query="#getCars#">
+		<cfloop query="#qryCars#">
 			<div class="row mb-2">
-				<div class="col-md-2"><a href="edit.cfm?carID=#getCars.carID#">#getCars.make# #getCars.model#</a></div>
-				<div class="col-md-2">#getCars.year#</div>
-				<div class="col-md-2">#getCars.color#</div>
-				<div class="col-md-2 text-right">$#getCars.listPrice#</div>
-				<div class="col-md-2 text-success text-right"><strong>$#getCars.salePrice#</strong></div>
+				<div class="col-md-2"><a href="edit.cfm?carID=#qryCars.carID#">#qryCars.make# #qryCars.model#</a></div>
+				<div class="col-md-2">#qryCars.year#</div>
+				<div class="col-md-2">#qryCars.color#</div>
+				<div class="col-md-2 text-right">$#qryCars.listPrice#</div>
+				<div class="col-md-2 text-success text-right"><strong>$#qryCars.salePrice#</strong></div>
 				<div class="col-md-2 text-right">
-					<a href="edit.cfm?carID=#getCars.carID#" class="btn btn-primary btn-sm">Edit</a>
-					<a href="delete.cfm?carID=#getCars.carID#" class="btn btn-danger btn-sm">Delete</a>
+					<a href="edit.cfm?carID=#qryCars.carID#" class="btn btn-primary btn-sm">Edit</a>
+					<a href="delete.cfm?carID=#qryCars.carID#" class="btn btn-danger btn-sm">Delete</a>
 				</div>
 			</div>
 		</cfloop>
