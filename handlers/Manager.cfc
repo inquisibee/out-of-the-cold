@@ -26,10 +26,10 @@ component{
 	function edit( event, rc, prc ){
 
 		rc.car = variables.carService.findCarByID(url.carID);
-		arMakes = variables.carService.findAllMakes();
-		arModels = variables.carService.findAllModels();
-		arColors = variables.carService.findAllColors();
-		arCategories = variables.carService.findAllCategories();
+		rc.arMakes = variables.carService.findAllMakes();
+		rc.arModels = variables.carService.findAllModels();
+		rc.arColors = variables.carService.findAllColors();
+		rc.arCategories = variables.carService.findAllCategories();
 
 		event.setView( "Manager/edit" );
 	}

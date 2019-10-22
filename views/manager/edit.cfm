@@ -5,7 +5,6 @@
 			<h6 class="m-0 font-weight-bold text-primary">Car Details</h6><a href="/admin/cars.cfm" class="btn btn-sm btn-primary">Back to Manager</a>
 			<!-- Card Header Dropdown -->
 		</div>
-
 		<div class="card-body">
 			<div class="row">
 				<div class="col-md-12">
@@ -16,8 +15,8 @@
 							<label for="make">Make</label>
 							<select name="makeID" id="make" class="custom-select customizeable">
 								<option value="">--Select--</option>
-								<cfloop array="#arMakes#" index="make">
-									<option value="#encodeForHTMLAttribute(rc.make.getMakeID())#"<cfif !isNull(rc.car.getMake()) and rc.car.getMake().getMakeID() eq rc.make.getMakeID()> selected="selected"</cfif>>#encodeForHTML(rc.make.getLongName())#</option>
+								<cfloop array="#rc.arMakes#" index="make">
+									<option value="#encodeForHTMLAttribute(make.getMakeID())#"<cfif !isNull(rc.car.getMake()) and rc.car.getMake().getMakeID() eq make.getMakeID()> selected="selected"</cfif>>#encodeForHTML(make.getLongName())#</option>
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
@@ -27,8 +26,8 @@
 							<label for="make">Model</label>
 							<select name="modelID" id="model" class="custom-select customizeable">
 								<option value="">--Select--</option>
-								<cfloop array="#arModels#" index="model">
-									<option value="#encodeForHTMLAttribute(rc.model.getModelID())#"<cfif !isNull(rc.car.getModel()) and rc.car.getModel().getModelID() eq rc.model.getModelID()> selected="selected"</cfif>>#encodeForHTML(rc.model.getLongName())#</option>
+								<cfloop array="#rc.arModels#" index="model">
+									<option value="#encodeForHTMLAttribute(model.getModelID())#"<cfif !isNull(rc.car.getModel()) and rc.car.getModel().getModelID() eq model.getModelID()> selected="selected"</cfif>>#encodeForHTML(model.getLongName())#</option>
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
@@ -38,8 +37,8 @@
 							<label for="category">Category</label>
 							<select name="categoryID" id="category" class="custom-select">
 								<option value="">--Select--</option>
-								<cfloop array="#arCategories#" index="category">
-									<option value="#encodeForHTMLAttribute(rc.category.getCategoryID())#"<cfif !isNull(rc.car.getCategory()) and rc.car.getCategory().getCategoryID() eq rc.category.getCategoryID()> selected="selected"</cfif>>#encodeForHTML(rc.category.getLongName())#</option>
+								<cfloop array="#rc.arCategories#" index="category">
+									<option value="#encodeForHTMLAttribute(category.getCategoryID())#"<cfif !isNull(rc.car.getCategory()) and rc.car.getCategory().getCategoryID() eq category.getCategoryID()> selected="selected"</cfif>>#encodeForHTML(category.getLongName())#</option>
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
@@ -53,8 +52,8 @@
 							<label for="color">Color</label>
 							<select name="colorID" id="color" class="custom-select customizeable">
 								<option value="">--Select--</option>
-								<cfloop array="#arColors#" index="color">
-									<option value="#encodeForHTMLAttribute(rc.color.getColorID())#"<cfif !isNull(rc.car.getColor()) and rc.car.getColor().getColorID() eq rc.color.getColorID()> selected="selected"</cfif>>#encodeForHTML(rc.color.getLongName())#</option>
+								<cfloop array="#rc.arColors#" index="color">
+									<option value="#encodeForHTMLAttribute(color.getColorID())#"<cfif !isNull(rc.car.getColor()) and rc.car.getColor().getColorID() eq color.getColorID()> selected="selected"</cfif>>#encodeForHTML(color.getLongName())#</option>
 								</cfloop>
 								<option value="other">Other</option>
 							</select>
